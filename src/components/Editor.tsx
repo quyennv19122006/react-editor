@@ -1,25 +1,40 @@
 import React, { Component } from 'react';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import { MonacoEditorProps } from './types';
 
-export class Editor extends Component {
-  public containerElement: React.RefObject<HTMLDivElement | null>;
-  public editor: React.RefObject<monaco.editor.IStandaloneCodeEditor | null>;
+interface MainProps {
+  heading: string;
+}
 
-  private _subscription: React.RefObject<monaco.IDisposable | null>;
-  private __prevent_trigger_change_event: React.RefObject<boolean | null>;
+interface MainState {
+  count: number;
+}
 
-  constructor(props: MonacoEditorProps) {
+class Editor extends Component<MainProps, MainState> {
+  constructor(props: MainProps) {
     super(props);
-    this.state = {};
-    this.containerElement = React.createRef();
-    this.editor = React.createRef();
-    this._subscription = React.createRef();
-    this.__prevent_trigger_change_event = React.createRef();
+    this.state = {
+      count: 0
+    };
+    this.increase = this.increase.bind(this);
+    this.decrease = this.decrease.bind(this);
+  }
+
+  increase() {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  decrease() {
+    this.setState({ count: this.state.count - 1 });
   }
 
   render() {
-    return <div>Editor</div>;
+    return (
+      <>
+        <h1>{this.props.heading}</h1>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.increase}>Increase</button>
+        <button onClick={this.decrease}>Decrease</button>
+      </>
+    );
   }
 }
 
