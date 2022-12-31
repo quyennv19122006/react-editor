@@ -1,41 +1,37 @@
-import React, { Component } from 'react';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import { useEffect, useMemo, useRef } from 'react';
+import { processSize, noop } from './utils';
 
-interface MainProps {
-  heading: string;
-}
+function Editor(height: number, width: number) {
+  const containerElement = useRef<HTMLDivElement | null>(null);
+  const editor = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const _subscription = useRef<monaco.IDisposable | null>(null);
+  const __prevent_trigger_change_event = useRef<boolean | null>(null);
 
-interface MainState {
-  count: number;
-}
+  const fixedHeight = processSize(height);
+  const fixedWidth = processSize(width);
 
-class Editor extends Component<MainProps, MainState> {
-  constructor(props: MainProps) {
-    super(props);
-    this.state = {
-      count: 0
-    };
-    this.increase = this.increase.bind(this);
-    this.decrease = this.decrease.bind(this);
-  }
+  const style = useMemo(
+    () => ({
+      height: fixedHeight,
+      width: fixedWidth
+    }),
+    [fixedHeight, fixedWidth]
+  );
 
-  increase() {
-    this.setState({ count: this.state.count + 1 });
-  }
+  useEffect(() => {
+    if (editor.current) {
+      editor.current.layout();
+    }
+  }, [width, height]);
 
-  decrease() {
-    this.setState({ count: this.state.count - 1 });
-  }
-
-  render() {
-    return (
-      <>
-        <h1>{this.props.heading}</h1>
-        <h1>{this.state.count}</h1>
-        <button onClick={this.increase}>Increase</button>
-        <button onClick={this.decrease}>Decrease</button>
-      </>
-    );
-  }
+  return (
+    <div
+      ref={containerElement}
+      style={style}
+      className="react-monaco-editor-container"
+    />
+  );
 }
 
 export default Editor;
