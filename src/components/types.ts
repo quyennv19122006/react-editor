@@ -27,34 +27,34 @@ export interface MonacoEditorBaseProps {
   /**
    * Width of editor. Defaults to 100%.
    */
-  width?: string | number;
+  width: string | number;
 
   /**
    * Height of editor. Defaults to 100%.
    */
-  height?: string | number;
+  height: string | number;
 
   /**
    * The initial value of the auto created model in the editor.
    */
-  defaultValue?: string;
+  defaultValue: string;
 
   /**
    * The initial language of the auto created model in the editor. Defaults to 'javascript'.
    */
-  language?: string;
+  language: string;
 
   /**
    * Theme to be used for rendering.
    * The current out-of-the-box available themes are: 'vs' (default), 'vs-dark', 'hc-black'.
    * You can create custom themes via `monaco.editor.defineTheme`.
    */
-  theme?: string | null;
+  theme: string | null;
 
   /**
    * Optional string classname to append to the editor.
    */
-  className?: string | null;
+  className: string | null;
 }
 
 export interface MonacoEditorProps extends MonacoEditorBaseProps {
@@ -63,35 +63,35 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
    * If you specify `null` or `undefined` for this property, the component behaves in uncontrolled mode.
    * Otherwise, it behaves in controlled mode.
    */
-  value?: string | null;
+  value: string | null;
 
   /**
    * Refer to Monaco interface {monaco.editor.IStandaloneEditorConstructionOptions}.
    */
-  options?: monacoEditor.editor.IStandaloneEditorConstructionOptions;
+  options: monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
   /**
    * Refer to Monaco interface {monaco.editor.IEditorOverrideServices}.
    */
-  overrideServices?: monacoEditor.editor.IEditorOverrideServices;
+  overrideServices: monacoEditor.editor.IEditorOverrideServices;
 
   /**
    * An event emitted before the editor mounted (similar to componentWillMount of React).
    */
-  editorWillMount?: EditorWillMount;
+  editorWillMount: EditorWillMount;
 
   /**
    * An event emitted when the editor has been mounted (similar to componentDidMount of React).
    */
-  editorDidMount?: EditorDidMount;
+  editorDidMount: EditorDidMount;
 
   /**
    * An event emitted before the editor unmount (similar to componentWillUnmount of React).
    */
-  editorWillUnmount?: EditorWillUnmount;
+  editorWillUnmount: EditorWillUnmount;
 
   /**
    * An event emitted when the content of the current model has changed.
    */
-  onChange?: ChangeHandler;
+  onChange: ChangeHandler;
 }
